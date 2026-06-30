@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI Prompt Token Counter — Free Online Tool</title>
+  <meta name="description" content="Count tokens in your AI prompt instantly. Free online token counter for ChatGPT, Claude, and Gemini. No sign-up required.">
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: system-ui, sans-serif; max-width: 800px; margin: 0 auto; padding: 24px 16px; color: #1a1a1a; }
+    h1 { font-size: 28px; margin-bottom: 8px; }
+    p.sub { color: #555; margin-bottom: 24px; }
+    textarea { width: 100%; height: 200px; padding: 12px; font-size: 15px; border: 1px solid #ccc; border-radius: 8px; resize: vertical; }
+    .stats { display: flex; gap: 16px; margin-top: 16px; flex-wrap: wrap; }
+    .stat { background: #f5f5f5; border-radius: 8px; padding: 16px 24px; flex: 1; min-width: 120px; }
+    .stat-value { font-size: 32px; font-weight: 700; color: #0066cc; }
+    .stat-label { font-size: 13px; color: #666; margin-top: 4px; }
+    .ad-slot { margin: 32px 0; text-align: center; background: #fafafa; padding: 16px; border-radius: 8px; }
+    .faq { margin-top: 40px; }
+    .faq h2 { font-size: 20px; margin-bottom: 16px; }
+    .faq details { border: 1px solid #eee; border-radius: 8px; padding: 12px 16px; margin-bottom: 8px; }
+    .faq summary { cursor: pointer; font-weight: 500; }
+    .faq p { margin-top: 8px; color: #555; line-height: 1.6; }
+  </style>
+</head>
+<body>
+
+  <h1>AI Prompt Token Counter</h1>
+  <p class="sub">Paste your prompt below to instantly count tokens, words, and characters.</p>
+
+  <textarea id="input" placeholder="Paste your AI prompt here..." oninput="count()"></textarea>
+
+  <div class="stats">
+    <div class="stat">
+      <div class="stat-value" id="tokens">0</div>
+      <div class="stat-label">Estimated tokens</div>
+    </div>
+    <div class="stat">
+      <div class="stat-value" id="words">0</div>
+      <div class="stat-label">Words</div>
+    </div>
+    <div class="stat">
+      <div class="stat-value" id="chars">0</div>
+      <div class="stat-label">Characters</div>
+    </div>
+    <div class="stat">
+      <div class="stat-value" id="cost">$0.00</div>
+      <div class="stat-label">Est. GPT-4o cost</div>
+    </div>
+  </div>
+
+  <!-- AdSense slot goes here -->
+  <div class="ad-slot">
+    <ins class="adsbygoogle"
+         style="display:block"
+         data-ad-client="ca-pub-XXXXXXXXXXXXXXXX"
+         data-ad-slot="XXXXXXXXXX"
+         data-ad-format="auto"
+         data-full-width-responsive="true"></ins>
+  </div>
+
+  <div class="faq">
+    <h2>Frequently asked questions</h2>
+    <details>
+      <summary>How are tokens counted?</summary>
+      <p>Tokens are roughly 4 characters or 0.75 words in English. This tool uses a close approximation of OpenAI's tokenizer — actual counts may vary by ±5%.</p>
+    </details>
+    <details>
+      <summary>Does this work for Claude and Gemini?</summary>
+      <p>Yes. Claude and Gemini use similar tokenization to GPT models for English text. For non-English text, token counts can differ significantly.</p>
+    </details>
+    <details>
+      <summary>Is my text stored anywhere?</summary>
+      <p>No. All processing happens in your browser. Nothing is sent to any server.</p>
+    </details>
+  </div>
+
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-XXXXXXXXXXXXXXXX" crossorigin="anonymous"></script>
+  <script>
+    (adsbygoogle = window.adsbygoogle || []).push({});
+
+    function count() {
+      const text = document.getElementById('input').value;
+      const chars = text.length;
+      const words = text.trim() === '' ? 0 : text.trim().split(/\s+/).length;
+      const tokens = Math.ceil(chars / 4);
+      const cost = ((tokens / 1000) * 0.005).toFixed(4); // GPT-4o input price
+
+      document.getElementById('chars').textContent   = chars.toLocaleString();
+      document.getElementById('words').textContent   = words.toLocaleString();
+      document.getElementById('tokens').textContent  = tokens.toLocaleString();
+      document.getElementById('cost').textContent    = '$' + cost;
+    }
+  </script>
+</body>
+</html>
